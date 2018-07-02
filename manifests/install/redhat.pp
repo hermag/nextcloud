@@ -4,29 +4,85 @@ class nextcloud::install::redhat {
     ensure => "installed",
   }
 
-  exec { 'remi-release-7-repo':
-    command => '/usr/bin/rpm -Uhv http://rpms.remirepo.net/enterprise/remi-release-7.rpm',
+  package { 'webtatic-release':
+    provider => "rpm",
+    ensure => "installed",
+    source => "https://mirror.webtatic.com/yum/el7/webtatic-release.rpm",
     require => Package['epel-release'],
   }
 
-  package { 'remi-release-7':
-    package => "installed",
-    require => Exec['remi-release-7-repo'],
-  }
+  #exec { 'remi-release-7-repo':
+  #  command => '/usr/bin/rpm -Uhv http://rpms.remirepo.net/enterprise/remi-release-7.rpm',
+  #  require => Package['epel-release'],
+  #}
 
-  package { 'epel-release-latest-7':
-    ensure => "installed",
-    require => Exec['remi-release-7'],
-  }
+  #package { 'remi-release-7':
+  #  package => "installed",
+  #  require => Exec['remi-release-7-repo'],
+  #}
 
-  $prerequisites = ['httpd','mariadb-server','php','php-mysql','php-dom','php-pecl-apcu','php-opcache','php-mbstring','php-gd','php-pdo','php-json','php-xml','php-zip','php-curl','php-mcrypt','php-pear','php-ldap','php-smbclient','nfs-utils','samba-client','samba-common','mod_ssl','setroubleshoot-server','bzip2']
+  #package { 'epel-release-latest-7':
+  #  ensure => "installed",
+  #  require => Exec['remi-release-7'],
+  #}
+
+  #$prerequisites = ['httpd',
+  #                   'mariadb-server',
+  #                   'php',
+  #                   'php-mysql',
+  #                   'php-dom',
+  #                   'php-pecl-apcu',
+  #                   'php-opcache',
+  #                   'php-mbstring',
+  #                   'php-gd',
+  #                   'php-pdo',
+  #                   'php-json',
+  #                   'php-xml',
+  #                   'php-zip',
+  #                   'php-curl',
+  #                   'php-mcrypt',
+  #                   'php-pear',
+  #                   'php-ldap',
+  #                   'php-smbclient',
+  #                   'nfs-utils',
+  #                   'samba-client',
+  #                   'samba-common',
+  #                   'mod_ssl',
+  #                   'setroubleshoot-server',
+  #                   'bzip2']
+  $prerequisites = ['httpd',
+                    'mariadb-server',
+                    'mod_ssl',
+                    'setroubleshoot-server',
+                    'php71w',
+                    'php71w-dom',
+                    'php71w-mysql',
+                    'php71w-mbstring',
+                    'php71w-pecl-apcu',
+                    'php71w-opcache',
+                    'php71w-gd',
+                    'php71w-pdo',
+                    'php71w-json',
+                    'php71w-xml',
+                    'php71w-zip',
+                    'php71w-curl',
+                    'php71w-mcrypt',
+                    'php71w-pear',
+                    'php71w-ldap',
+                    'bzip2',
+                    'wget']
   package { $prerequisites:
     ensure => "installed",
-    require => Exec['epel-release-latest-7'],
+    require => Package['webtatic-release'],
   }
   
-  package { 'mariadb-server':
-    ensure => "installed",
-    require => Package['epel-release'],
-  }
+  #package { 'mariadb-server':
+  #  ensure => "installed",
+  #  require => Package['epel-release'],
+  #}
+
+
+
+
+
 }

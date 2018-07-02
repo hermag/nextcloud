@@ -14,7 +14,6 @@ class nextcloud::service inherits nextcloud {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    require => Package['mariadb-server'],
   }
 
   $mysql_password = "myT0pS3cretPa55worD"
