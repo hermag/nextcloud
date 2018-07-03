@@ -19,11 +19,27 @@ include '::mysql::server'
     }
 
     file {
-          $certroot:
+          $keyroot:
               ensure => "directory",
               owner => "root",
               group => "root",
               mode => "0700",
+    }
+
+    file {
+           "$keyroot/apache-selfsigned.crt.erb":
+              content => template('apache-selfsigned.crt.erb'),
+              owner   => root,
+              group   => root,
+              mode    => 644,
+    }
+
+    file { 
+           "$certroot/apache-selfsigned.crt.erb":
+              content => template('apache-selfsigned.key.erb'),
+              owner   => root,
+              group   => root,
+              mode    => 644,
     }
 
 }
