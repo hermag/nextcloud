@@ -59,7 +59,7 @@ include '::mysql::server'
               owner   => "root",
               group   => "root",
               mode    => "644",
-              require => File["$certroot/ssl.conf"],
+              require => File["$apacheroot/ssl.conf"],
     }
 
 }
