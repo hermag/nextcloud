@@ -3,8 +3,8 @@ include '::mysql::server'
  class nextcloud::config inherits nextcloud {
    class { '::mysql::server':
               root_password => $dbrootpassword,
-              remove_default_accounts => true,
-              override_options => $override_options
+              #remove_default_accounts => true,
+              #override_options => $override_options
          }
     # if $::nextcloud::manage_db {
     #    class { 'mysql::server':
