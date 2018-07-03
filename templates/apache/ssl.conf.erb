@@ -58,8 +58,9 @@ SSLCryptoDevice builtin
 # General setup for the virtual host, inherited from global configuration
 
 ####NextCloud Location!!!
-DocumentRoot "/var/www/html/nextcloud"
-ServerName 10.254.25.203:443
+DocumentRoot <%=@docroot/nextcloud%>
+ServerName <%=@ipaddress:443%>
+#ServerName <%=@fqdn:443%>
 ####
 
 # Use separate log files for the SSL virtual host; note that LogLevel
@@ -101,7 +102,7 @@ SSLEngine on
 # pass phrase.  Note that a kill -HUP will prompt again.  A new
 # certificate can be generated using the genkey(1) command.
 #SSLCertificateFile /etc/pki/tls/certs/localhost.crt
-SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+SSLCertificateFile <%=@certroot/apache-selfsigned.crt%>
 
 #   Server Private Key:
 #   If the key is not combined with the certificate, use this
@@ -109,7 +110,7 @@ SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
 #   you've both a RSA and a DSA private key you can configure
 #   both in parallel (to also allow the use of DSA ciphers, etc.)
 #SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
-SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+SSLCertificateKeyFile <%=@keyroot/apache-selfsigned.key%>
 
 #   Server Certificate Chain:
 #   Point SSLCertificateChainFile at a file containing the
