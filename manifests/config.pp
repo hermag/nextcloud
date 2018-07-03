@@ -1,18 +1,18 @@
 include '::mysql::server'
 
-class nextcloud::config inherits nextcloud {
-    if $::nextcloud::manage_db {
-       class { 'mysql::server':
-          root_password           => $dbrootpassword,
-          remove_default_accounts => true,
-       }
-    }
+class { '::mysql::server':
+      root_password => $dbrootpassword,
+      remove_default_accounts => true,
+      override_options => $override_options
+}
 
-    class { '::mysql::server':
-          root_password => $dbrootpassword,
-          remove_default_accounts => true,
-          override_options => $override_options
-    }
+class nextcloud::config inherits nextcloud {
+    # if $::nextcloud::manage_db {
+    #    class { 'mysql::server':
+    #       root_password           => $dbrootpassword,
+    #       remove_default_accounts => true,
+    #    }
+    # }
 
     # $mysql_password = "myT0pS3cretPa55worD"
     # exec { "set-mariadb-password":
