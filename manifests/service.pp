@@ -8,10 +8,10 @@ class nextcloud::service inherits nextcloud {
     require => Package[$packages],
   }
 
-  service { 'mariadb':
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-  }
+  # service { 'mariadb':
+  #   ensure     => running,
+  #   enable     => true,
+  #   hasstatus  => true,
+  #   hasrestart => true,
+  # }
 }
