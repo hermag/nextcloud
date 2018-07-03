@@ -23,7 +23,7 @@ include '::mysql::server'
               ensure => "directory",
               owner => "root",
               group => "root",
-              mode => 0700,
+              mode => "0700",
     }
-    
+
 }
