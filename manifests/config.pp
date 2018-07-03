@@ -1,11 +1,6 @@
 include '::mysql::server'
 
  class nextcloud::config inherits nextcloud {
-   class { '::mysql::server':
-              root_password => $dbrootpassword,
-              #remove_default_accounts => true,
-              #override_options => $override_options
-         }
     # if $::nextcloud::manage_db {
     #    class { 'mysql::server':
     #       root_password           => $dbrootpassword,
@@ -29,4 +24,16 @@ include '::mysql::server'
     #    command => "/usr/bin/mysql -uroot -p$mysql_password -e \"create database ${dbname}; grant all on ${dbname}.* to ${user}@localhost identified by '$password';\"",
     #    require => Exec["set-mariadb-password"],
     #}
+    class { '::mysql::server':
+               root_password => $dbrootpassword,
+               remove_default_accounts => true,
+               #override_options => $override_options
+          }
+
+    mysql::db { $dbname:
+          user     => $dbuser,
+          password => $dbpass,
+          host     => 'localhost',
+          grant    => ['ALL'],
+         }
 }
