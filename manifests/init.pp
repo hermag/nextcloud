@@ -53,6 +53,7 @@ class nextcloud (
   $install_url              = "https://download.nextcloud.com/server/releases/${install_file}",
   $fresh_install            = true,
   #$db_backup_path = '/vagrant/nextcloud.sql',
+  $srvip                    = $::ipaddress
   $manage_db                = true,
   $manage_apache            = true,
   $datadir_default_location = false,
