@@ -29,17 +29,17 @@ include '::mysql::server'
     file {
            "$keyroot/apache-selfsigned.crt.erb":
               content => template('nextcloud/apache-selfsigned.crt.erb'),
-              owner   => root,
-              group   => root,
-              mode    => 644,
+              owner   => "root",
+              group   => "root",
+              mode    => "644",
     }
 
     file {
            "$certroot/apache-selfsigned.crt.erb":
               content => template('nextcloud/apache-selfsigned.key.erb'),
-              owner   => root,
-              group   => root,
-              mode    => 644,
+              owner   => "root",
+              group   => "root",
+              mode    => "644",
     }
 
 }
