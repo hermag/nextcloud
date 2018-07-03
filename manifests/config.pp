@@ -7,13 +7,20 @@ class nextcloud::config inherits nextcloud {
           remove_default_accounts => true,
        }
     }
-    $mysql_password = "myT0pS3cretPa55worD"
-    exec { "set-mariadb-password":
-        unless => "mysqladmin -uroot -p$mysql_password status",
-        path => ["/bin", "/usr/bin"],
-        command => "mysqladmin -uroot password $mysql_password",
-        require => Service["mariadb"],
+
+    class { '::mysql::server':
+          root_password => $dbrootpassword,
+          remove_default_accounts => true,
+          override_options => $override_options
     }
+
+    # $mysql_password = "myT0pS3cretPa55worD"
+    # exec { "set-mariadb-password":
+    #     unless => "mysqladmin -uroot -p$mysql_password status",
+    #     path => ["/bin", "/usr/bin"],
+    #     command => "mysqladmin -uroot password $mysql_password",
+    #     require => Service["mariadb"],
+    # }
 
     $user = "nxtuser"
     $password = "Nextcloud@123#"
