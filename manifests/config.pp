@@ -1,3 +1,5 @@
+include '::mysql::server'
+
 class nextcloud::config inherits nextcloud {
     if $::nextcloud::manage_db {
        class { 'mysql::server':
@@ -20,5 +22,5 @@ class nextcloud::config inherits nextcloud {
         unless => "/usr/bin/mysql -u${user} -p${password} ${dbname}",
         command => "/usr/bin/mysql -uroot -p$mysql_password -e \"create database ${dbname}; grant all on ${dbname}.* to ${user}@localhost identified by '$password';\"",
         require => Exec["set-mariadb-password"],
-    } 
+    }
 }

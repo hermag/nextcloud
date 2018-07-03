@@ -60,8 +60,9 @@ class nextcloud (
   #$datadir                  = "${docroot}/nextcloud/data",
   $datadir                  = '/home/nextcloudDATA',
   $import_db                = false,
-) {
+  )
+  {
     include nextcloud::install
+    include nextcloud::config
     include nextcloud::service
-    #include nextcloud::config
-}
+  }
