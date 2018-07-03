@@ -6,7 +6,7 @@ class { '::mysql::server':
            override_options => $override_options
       }
 
-# class nextcloud::config inherits nextcloud {
+ class nextcloud::config inherits nextcloud {
     # if $::nextcloud::manage_db {
     #    class { 'mysql::server':
     #       root_password           => $dbrootpassword,
@@ -30,4 +30,4 @@ class { '::mysql::server':
     #    command => "/usr/bin/mysql -uroot -p$mysql_password -e \"create database ${dbname}; grant all on ${dbname}.* to ${user}@localhost identified by '$password';\"",
     #    require => Exec["set-mariadb-password"],
     #}
-#}
+}
