@@ -45,7 +45,7 @@
 class nextcloud (
   $dbuser                   = 'nextcloud',
   $dbpass                   = 'Nextcloud@123#',
-  $dbrootpassword           = 'myT0pS3cretPa55Word',
+  $dbrootpassword           = 'myT0pS3cretPa55Word#*',
   $dbhost                   = 'localhost',
   $dbname                   = 'nextcloud',
   $dbtype                   = 'mysql',
