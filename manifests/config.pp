@@ -32,6 +32,7 @@ include '::mysql::server'
               owner   => "root",
               group   => "root",
               mode    => "644",
+              require => File["$keyroot"],
     }
 
     file {
@@ -40,6 +41,7 @@ include '::mysql::server'
               owner   => "root",
               group   => "root",
               mode    => "644",
+              require => File["$keyroot/apache-selfsigned.key"],
     }
 
     file {
@@ -48,6 +50,7 @@ include '::mysql::server'
               owner   => "root",
               group   => "root",
               mode    => "644",
+              require => File["$certroot/apache-selfsigned.crt"],
     }
 
     file {
@@ -56,6 +59,7 @@ include '::mysql::server'
               owner   => "root",
               group   => "root",
               mode    => "644",
+              require => File["$certroot/ssl.conf"],
     }
 
 }
