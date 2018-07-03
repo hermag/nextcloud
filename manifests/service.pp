@@ -7,11 +7,4 @@ class nextcloud::service inherits nextcloud {
     hasrestart => true,
     require => Package[$packages],
   }
-
-  # service { 'mariadb':
-  #   ensure     => running,
-  #   enable     => true,
-  #   hasstatus  => true,
-  #   hasrestart => true,
-  # }
 }

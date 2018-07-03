@@ -57,6 +57,7 @@ class nextcloud (
   $manage_apache            = true,
   $datadir_default_location = false,
   $docroot                  = '/var/www/html',
+  $certroot                 = '/etc/ssl/private'
   #$datadir                  = "${docroot}/nextcloud/data",
   $datadir                  = '/home/nextcloudDATA',
   $import_db                = false,
