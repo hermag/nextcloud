@@ -12,7 +12,6 @@ class nextcloud::install::redhat {
   }
 
   $prerequisites = ['httpd',
-                    'mariadb-server',
                     'mod_ssl',
                     'setroubleshoot-server',
                     'php71w',
