@@ -37,7 +37,7 @@ class nextcloud::install::redhat {
   }
 
   exec { 'GetNextCloud':
-    command => '/usr/bin/wget $install_url -O /tmp/nextcloud.tar.bz2',
+    command => "/usr/bin/wget $install_url -O /tmp/nextcloud.tar.bz2",
     unless  => "/usr/bin/ls -laF $docroot | grep nextcloud",
     require => Package[$prerequisites]
   }
