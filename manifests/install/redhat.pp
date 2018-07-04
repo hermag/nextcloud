@@ -35,4 +35,6 @@ class nextcloud::install::redhat {
     ensure => "installed",
     require => Package['webtatic-release'],
   }
+
+
 }

@@ -28,6 +28,14 @@ include firewalld
     }
 
     file {
+          $datadir:
+              ensure => "directory",
+              owner => "apache",
+              group => "apache",
+              mode => "0774",
+    }
+
+    file {
            "$keyroot/apache-selfsigned.key":
               content => template('nextcloud/apache/apache-selfsigned.key.erb'),
               owner   => "root",
