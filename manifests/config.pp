@@ -65,12 +65,13 @@ include firewalld
               require => File["$apacheroot/ssl.conf"],
     }
 
-    firewalld_port {'Open port 443 in the public Zone':
-        notify  => Service['firewalld'],
-        ensure   => 'present',
-        zone     => 'public',
-        port     => '443',
-        protocol => 'tcp',
+    firewalld_port {
+           "Open port 443 in the public Zone":
+              notify  => Service['firewalld'],
+              ensure   => 'present',
+              zone     => 'public',
+              port     => '443',
+              protocol => 'tcp',
     }
 
 }
