@@ -66,6 +66,7 @@ include firewalld
     }
 
     firewalld_port {'Open port 443 in the public Zone':
+        notify  => Service['firewalld'],
         ensure   => 'present',
         zone     => 'public',
         port     => '443',
