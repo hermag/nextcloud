@@ -1,5 +1,3 @@
-include wget
-
 class nextcloud::install::redhat {
 
   package { 'epel-release':
@@ -38,7 +36,13 @@ class nextcloud::install::redhat {
     require => Package['webtatic-release'],
   }
 
-  wget::fetch { $install_url:
+  exec { 'GetNextCloud':
+    command => '/usr/bin/wget $install_url -O /tmp/nextcloud.tar.bz2',
+    onlyif  => 'ls -laF $docroot | grep nextcloud',
+    require => Package[$prerequisites]
+  }
+
+  exec { $install_url:
     source      => $install_url,
     destination => '/tmp/',
     timeout     => "60",
