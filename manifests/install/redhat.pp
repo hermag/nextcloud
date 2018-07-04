@@ -52,4 +52,10 @@ class nextcloud::install::redhat {
     require => Exec["GetNextCloud"],
   }
 
+  file { "$nextcloud::docroot/nextcloud":
+    ensure => directory,
+    recurse => true,
+    owner => "apache",
+    group => "apache",
+    mode => 0775,   }
 }
