@@ -46,6 +46,7 @@ include '::mysql::server'
 
     file {
            "$apacheroot/ssl.conf":
+              notify  => Service['httpd'],
               content => template('nextcloud/apache/ssl.conf.erb'),
               owner   => "root",
               group   => "root",
@@ -55,6 +56,7 @@ include '::mysql::server'
 
     file {
            "$apacheroot/non-ssl.conf":
+              notify  => Service['httpd'],
               content => template('nextcloud/apache/non-ssl.conf.erb'),
               owner   => "root",
               group   => "root",
