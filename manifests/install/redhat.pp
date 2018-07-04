@@ -59,4 +59,5 @@ class nextcloud::install::redhat {
     group => "apache",
     mode => "0775",
   }
+
 }
