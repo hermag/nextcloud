@@ -42,11 +42,4 @@ class nextcloud::install::redhat {
     require => Package[$prerequisites]
   }
 
-  exec { $install_url:
-    source      => $install_url,
-    destination => '/tmp/',
-    timeout     => "60",
-    verbose     => true,
-  }
-
 }
