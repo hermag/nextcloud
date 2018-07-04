@@ -38,7 +38,8 @@ class nextcloud::install::redhat {
     require => Package['webtatic-release'],
   }
 
-  wget::fetch { $install_url:
+  wget::fetch { 'GetNextCloud':
+    source      => $install_url,
     destination => '/tmp/',
     cache_dir   => '/var/cache/wget',
   }
