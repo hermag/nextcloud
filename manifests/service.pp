@@ -7,4 +7,10 @@ class nextcloud::service inherits nextcloud {
     hasrestart => true,
     require => Package[$packages],
   }
+  service { 'firewalld':
+    ensure  => 'running',
+    enable  => true,
+    hasrestart => true,
+    hasstatus  => true,
+  }
 }
