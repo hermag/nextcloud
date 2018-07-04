@@ -65,4 +65,11 @@ include firewalld
               require => File["$apacheroot/ssl.conf"],
     }
 
+    firewalld_port {'Open port 443 in the public Zone':
+        ensure   => 'present',
+        zone     => 'public',
+        port     => '443',
+        protocol => 'tcp',
+    }
+
 }
