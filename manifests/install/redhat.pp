@@ -1,3 +1,5 @@
+include '::archive'
+
 class nextcloud::install::redhat {
 
   package { 'epel-release':
@@ -41,6 +43,13 @@ class nextcloud::install::redhat {
     unless  => "/usr/bin/ls -laF $nextcloud::docroot | grep nextcloud",
     provider => shell,
     require => Package[$prerequisites],
+  }
+
+  exec { 'ExtractNextCloud':
+    command => "/usr/bin/tar /tmp/nextcloud.tar.bz2 -C $nextcloud::docroot/",
+    unless  => "/usr/bin/ls -laF $nextcloud::docroot | grep nextcloud",
+    provider => shell,
+    require => Exec["GetNextCloud"],
   }
 
 }
