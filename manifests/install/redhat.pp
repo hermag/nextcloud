@@ -57,5 +57,6 @@ class nextcloud::install::redhat {
     recurse => true,
     owner => "apache",
     group => "apache",
-    mode => 0775,   }
+    mode => "0775",
+  }
 }
