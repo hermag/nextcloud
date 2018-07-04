@@ -41,7 +41,8 @@ class nextcloud::install::redhat {
   wget::fetch { 'GetNextCloud':
     source      => $install_url,
     destination => '/tmp/',
-    cache_dir   => '/var/cache/wget',
+    timeout     => "60",
+    verbose     => true,
   }
 
 }
