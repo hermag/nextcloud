@@ -1,4 +1,5 @@
 include '::mysql::server'
+include firewalld
 
  class nextcloud::config inherits nextcloud {
     if $::nextcloud::manage_db {
