@@ -46,7 +46,7 @@ class nextcloud::install::redhat {
   }
 
   exec { 'ExtractNextCloud':
-    command => "/usr/bin/tar /tmp/nextcloud.tar.bz2 -C $nextcloud::docroot/",
+    command => "/usr/bin/tar -jxvf /tmp/nextcloud.tar.bz2 -C $nextcloud::docroot/",
     unless  => "/usr/bin/ls -laF $nextcloud::docroot | grep nextcloud",
     provider => shell,
     require => Exec["GetNextCloud"],
