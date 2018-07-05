@@ -131,12 +131,12 @@ include firewalld
               require => Exec[$httpd_can_sendmail],
     }
 
-    exec {
-           'httpd_can_network_connect':
-              command => "/usr/sbin/setsebool -P httpd_can_network_connect on",
-              provider => shell,
-              require => Exec[$httpd_can_sendmail],
-    }
+    # exec {
+    #        'httpd_can_network_connect':
+    #           command => "/usr/sbin/setsebool -P httpd_can_network_connect on",
+    #           provider => shell,
+    #           require => Exec[$httpd_can_sendmail],
+    # }
 
     exec {
            'allow_data_dir_root':
