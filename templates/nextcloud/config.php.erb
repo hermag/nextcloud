@@ -65,26 +65,28 @@ $CONFIG = array(
  *   This disallows all other ports on this host
  * - use * as a wildcard, e.g. ubos-raspberry-pi*.local will allow
  *   ubos-raspberry-pi.local and ubos-raspberry-pi-2.local
- */
+ *
  *'trusted_domains' =>
  *  array (
  *    'demo.example.org',
  *    'otherdomain.example.org',
  *  ),
+ */
  'trusted_domains' =>
    array (
       '<%= @fqdn %>',
       '<%= @ipaddress %>',
    ),
-*/
+
 
 /**
  * Where user files are stored. The SQLite database is also stored here, when
  * you use SQLite.
  *
  * Default to ``data/`` in the Nextcloud directory.
- */
+ *
  *'datadirectory' => '/var/www/nextcloud/data',
+ */
  'datadirectory' => '<%= @datadir %>',
 
 /**
