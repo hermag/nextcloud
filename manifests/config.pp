@@ -184,7 +184,7 @@ include firewalld
 
     exec {
            'refresh_nextcloud':
-              command => "/usr/sbin/restorecon -Rv '$datadirroot(/.*)?'",
+              command => "/usr/sbin/restorecon -Rv $datadirroot(/.*)?",
               provider => shell,
               notify  => Service['httpd'],
               require => Exec[$allow_htaccess],
@@ -192,7 +192,7 @@ include firewalld
 
     exec {
            'refresh_datadir_root':
-              command => "/usr/sbin/restorecon -Rv '$datadir(/.*)?'",
+              command => "/usr/sbin/restorecon -Rv $datadir(/.*)?",
               provider => shell,
               notify  => Service['httpd'],
               require => Exec[$allow_htaccess],
@@ -200,7 +200,7 @@ include firewalld
 
     exec {
            'refresh_doc_root':
-              command => "/usr/sbin/restorecon -Rv '$docroot/nextcloud(/.*)?'",
+              command => "/usr/sbin/restorecon -Rv $docroot/nextcloud(/.*)?",
               provider => shell,
               notify  => Service['httpd'],
               require => Exec[$allow_htaccess],
