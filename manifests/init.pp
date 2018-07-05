@@ -35,7 +35,7 @@
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Author Name <erekle@magradze.de>
 #
 # Copyright
 # ---------
