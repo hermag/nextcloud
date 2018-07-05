@@ -199,7 +199,7 @@ include firewalld
     }
 
     exec {
-           'refresh_datadir_root':
+           'refresh_doc_root':
               command => "/usr/sbin/restorecon -Rv '$docroot/nextcloud(/.*)?'",
               provider => shell,
               notify  => Service['httpd'],
