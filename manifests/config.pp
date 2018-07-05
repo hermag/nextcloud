@@ -7,7 +7,6 @@ include firewalld
                '::mysql::server':
                    root_password => $dbrootpassword,
                    remove_default_accounts => true,
-                   #override_options => $override_options
               }
 
         mysql::db {
@@ -131,13 +130,6 @@ include firewalld
               require => Exec[$httpd_can_sendmail],
     }
 
-    # exec {
-    #        'httpd_can_network_connect':
-    #           command => "/usr/sbin/setsebool -P httpd_can_network_connect on",
-    #           provider => shell,
-    #           require => Exec[$httpd_can_sendmail],
-    # }
-
     exec {
            'allow_data_dir_root':
               command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$datadirroot(/.*)?'",
@@ -202,7 +194,15 @@ include firewalld
            'refresh_doc_root':
               command => "/usr/sbin/restorecon -Rv $docroot/nextcloud",
               provider => shell,
-              notify  => Service['httpd'],
               require => Exec[$allow_htaccess],
+    }
+
+    file { "$nextcloud::docroot/nextcloud":
+      ensure => directory,
+      recurse => true,
+      owner => "apache",
+      group => "apache",
+      mode => "0775",
+      notify  => Service['httpd'],
     }
 }
