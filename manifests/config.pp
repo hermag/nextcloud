@@ -90,4 +90,119 @@ include firewalld
               group   => "apache",
     }
 
+    exec {
+           'httpd_can_network_connect_db':
+              command => "/usr/sbin/setsebool -P httpd_can_network_connect_db 1",
+              provider => shell,
+    }
+
+    exec {
+           'httpd_use_nfs':
+              command => "/usr/sbin/setsebool -P httpd_use_nfs on",
+              provider => shell,
+              require => Exec[$httpd_can_network_connect_db],
+    }
+
+    exec {
+           'httpd_use_cifs':
+              command => "/usr/sbin/setsebool -P httpd_use_cifs on",
+              provider => shell,
+              require => Exec[$httpd_use_nfs],
+    }
+
+    exec {
+           'httpd_can_connect_ldap':
+              command => "/usr/sbin/setsebool -P httpd_can_connect_ldap on",
+              provider => shell,
+              require => Exec[$httpd_use_cifs],
+    }
+
+    exec {
+           'httpd_can_sendmail':
+              command => "/usr/sbin/setsebool -P httpd_can_sendmail on",
+              provider => shell,
+              require => Exec[$httpd_can_connect_ldap],
+    }
+
+    exec {
+           'httpd_can_network_connect':
+              command => "/usr/sbin/setsebool -P httpd_can_network_connect on",
+              provider => shell,
+              require => Exec[$httpd_can_sendmail],
+    }
+
+    exec {
+           'httpd_can_network_connect':
+              command => "/usr/sbin/setsebool -P httpd_can_network_connect on",
+              provider => shell,
+              require => Exec[$httpd_can_sendmail],
+    }
+
+    exec {
+           'allow_data_dir_root':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$datadirroot(/.*)?'",
+              provider => shell,
+              require => Exec[$httpd_can_network_connect],
+    }
+    exec {
+           'allow_data_dir':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$datadir(/.*)?'",
+              provider => shell,
+              require => Exec[$allow_data_dir_root],
+    }
+    exec {
+           'allow_config':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$docroot/nextcloud/config(/.*)?'",
+              provider => shell,
+              require => Exec[$allow_data_dir],
+    }
+    exec {
+           'allow_apps':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$docroot/nextcloud/apps(/.*)?'",
+              provider => shell,
+              require => Exec[$allow_config],
+    }
+    exec {
+           'allow_3rdparty':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$docroot/nextcloud/3rdparty(/.*)?'",
+              provider => shell,
+              require => Exec[$allow_apps],
+    }
+    exec {
+           'allow_htaccess':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$docroot/nextcloud/.htaccess'",
+              provider => shell,
+              require => Exec[$allow_3rdparty],
+    }
+    exec {
+           'allow_user_ini':
+              command => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '$docroot/nextcloud/.user.ini'",
+              provider => shell,
+              notify  => Service['httpd'],
+              require => Exec[$allow_htaccess],
+    }
+
+    exec {
+           'refresh_nextcloud':
+              command => "/usr/sbin/restorecon -Rv '$datadirroot(/.*)?'",
+              provider => shell,
+              notify  => Service['httpd'],
+              require => Exec[$allow_htaccess],
+    }
+
+    exec {
+           'refresh_datadir_root':
+              command => "/usr/sbin/restorecon -Rv '$datadir(/.*)?'",
+              provider => shell,
+              notify  => Service['httpd'],
+              require => Exec[$allow_htaccess],
+    }
+
+    exec {
+           'refresh_datadir_root':
+              command => "/usr/sbin/restorecon -Rv '$docroot/nextcloud(/.*)?'",
+              provider => shell,
+              notify  => Service['httpd'],
+              require => Exec[$allow_htaccess],
+    }
 }

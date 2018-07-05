@@ -61,11 +61,11 @@ class nextcloud (
   $keyroot                  = '/etc/ssl/private',
   $certroot                 = '/etc/ssl/certs',
   $apacheroot               = '/etc/httpd/conf.d',
-  #$datadir                  = "${docroot}/nextcloud/data",
-  $datadir                  = '/home/nextcloudDATA',
+  $datadirroot              = "/home",
+  $datadir                  = "${datadirroot}/nextcloudDATA",
   $import_db                = false,
   $dbtableprefix            = 'NextCloud',
-  $version                  = '13.0.4',
+  $version                  = '13.0.4.0',
   )
   {
     include nextcloud::install
