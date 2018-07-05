@@ -64,6 +64,8 @@ class nextcloud (
   #$datadir                  = "${docroot}/nextcloud/data",
   $datadir                  = '/home/nextcloudDATA',
   $import_db                = false,
+  $dbtableprefix            = 'NextCloud',
+  $version                  = '13.0.4',
   )
   {
     include nextcloud::install

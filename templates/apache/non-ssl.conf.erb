@@ -1,4 +1,4 @@
 <VirtualHost *:80>
         ServerName <%=@hostname%>
-        Redirect "/" "https://<%=@ipaddress%>/nextcloud"
+        Redirect "/" "https://<%= @ipaddress %>/nextcloud"
 </VirtualHost>
