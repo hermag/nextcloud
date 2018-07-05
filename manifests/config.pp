@@ -82,4 +82,12 @@ include firewalld
               protocol => 'tcp',
     }
 
+    file {
+           "$docroot/nextcloud/config/config.php":
+              notify  => Service['httpd'],
+              content => template('nextcloud/nextcloud/config.php.erb'),
+              owner   => "apache",
+              group   => "apache",
+    }
+
 }
