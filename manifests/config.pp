@@ -130,12 +130,13 @@ include firewalld
               require  => Exec[$httpd_can_sendmail],
     }
 
-    exec {
+     exec {
            'allow_data_dir_root':
-              command  => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '${datadirroot}/nextcloud(/.*)?'",
+              command  => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '${datadirroot}(/.*)?'",
               provider => shell,
               require  => Exec[$httpd_can_network_connect],
     }
+
     exec {
            'allow_data_dir':
               command  => "/usr/sbin/semanage fcontext -a -t httpd_sys_rw_content_t '${datadir}(/.*)?'",
